@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529014836) do
+ActiveRecord::Schema.define(version: 20150529022348) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "assemblies", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +31,18 @@ ActiveRecord::Schema.define(version: 20150529014836) do
     t.integer "part_id"
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "orders_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clients_roles", id: false, force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "role_id"
+  end
+
   create_table "dogs", force: :cascade do |t|
     t.string   "name"
     t.string   "people_type"
@@ -32,10 +51,23 @@ ActiveRecord::Schema.define(version: 20150529014836) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.string   "order_no"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "parts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "soldiers", force: :cascade do |t|
