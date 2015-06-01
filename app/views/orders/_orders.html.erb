@@ -1,0 +1,50 @@
+<% @order_list= capture do %>
+    <% @orders.each do |order| %>
+        <div><%= link_to order.order_no, order_path(order) %></div>
+    <% end %>
+<% end %>
+<div id="content">
+  <%= @order_list %>
+</div>
+
+
+<%= field_set_tag 'Helper' do %>
+    <h4>select associated client for the order(using collection_select):</h4>
+    <%= collection_select(:order, :client_id, Client.all, :id, :name, {prompt: true}) %>
+
+
+    <h4>select associated clients for the order(using collection_radio_buttons):</h4>
+    <%= collection_radio_buttons(:order, :name, Client.all, :id, :name) %>
+
+    <h4>select associated clients for the order(using option_groups_from_collection_for_select):</h4>
+    <select>
+      <%= option_groups_from_collection_for_select(Client.all, :orders, :name, :id, :order_no, 3) %>
+    </select>
+
+
+    <h4>options_from_colletion_for_select</h4>
+    <select><%= options_from_collection_for_select(@orders, "order_no", "order_no") %></select>
+    <h4>Form Tag Helper</h4>
+    <h5>date_field</h5>
+    <%= date_field("order", "Bob") %>
+    <h5>check_box_tag</h5>
+    <%= check_box_tag 'ckb-tag', 1, true, {id: '1111'} %>
+    <h5>field_set_tag</h5>
+    <%= field_set_tag do %>
+        <p><%= text_field_tag 'text-field-tag' %></p>
+    <% end %>
+    <h5>form_tag</h5>
+    <%= form_tag do %>
+        <%= label_tag 'lbl', 'File To Upload', {for: 'file'} %>
+        <%= file_field_tag 'file' %>
+        <%= submit_tag 'Uplaod' %>
+    <% end %>
+    <h5>password_field_tag</h5>
+    <%= password_field_tag %>
+    <h5>javascript_tag</h5>
+    <h5>strip</h5>
+    <%= strip_links("<a href='http://rubyonrails.org'>Ruby on Rails</a>") %>
+<% end %>
+
+
+

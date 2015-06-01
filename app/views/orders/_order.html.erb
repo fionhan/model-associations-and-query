@@ -1,0 +1,34 @@
+<%= form_for item do |f| %>
+    <%= f.text_field :order_no %>
+    <%= f.submit 'Edit' %>
+<% end %>
+
+<%= field_set_tag 'Helper' do |f| %>
+    <h4>content_tag_for</h4>
+    <%= content_tag_for(:div, item, class: "test-div") do |item| %>
+        <%= item.order_no %>
+    <% end %>
+
+    <h4>div_for</h4>
+    <%= div_for(item, class: "test-div") do %>
+        <%= item.order_no %>
+    <% end %>
+    <h4>path helper</h4>
+    image_path:<%= image_path("edit.png") %>
+    image_url:<%= image_url("edit.png") %>
+    javascript_path:<%= javascript_path("edit.png") %>
+    javascript_path:<%= javascript_url("edit.png") %>
+    <h4>date select</h4>
+    <div>
+      <%= date_select("order", "created_at") %>
+    </div>
+    <div>
+      <%= select_date(Time.now + 6.days) %>
+    </div>
+    <div>
+      <%= distance_of_time_in_words(Time.now, Time.now + 15.minutes) %>
+    </div>
+<% end %>
+
+
+

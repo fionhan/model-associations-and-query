@@ -15,4 +15,5 @@ class Client <ActiveRecord::Base
   # def self.lives_in_london
   #   joins(:address).where("addresses.name='London'")
   # end
+
 end
